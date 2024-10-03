@@ -1,0 +1,46 @@
+<!-- templates/test1/file_show.html -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>파일 목록</title>
+</head>
+<body>
+    <h1>저장된 파일 목록</h1>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>PK</th>
+                <th>제목</th>
+                <th>내용</th>
+                <th>이미지</th>
+                <th>파일</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for file in files %}
+            <tr>
+                <td>{{ file.pk }}</td>
+                <td>{{ file.title }}</td>
+                <td>{{ file.content }}</td>
+                <td>
+                    {% if file.image %}
+                        <img src="{{ file.image.url }}" alt="이미지" style="max-width: 200px;">
+                    {% else %}
+                        이미지 없음
+                    {% endif %}
+                </td>
+                <td>
+                    {% if file.file %}
+                        <a href="{{ file.file.url }}">다운로드</a>
+                    {% else %}
+                        파일 없음
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
